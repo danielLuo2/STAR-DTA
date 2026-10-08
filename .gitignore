@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# training outputs
+runs/
+logs/
+*.pt
+*.pth
+*.npz
+
+# Davis / KIBA are downloaded separately (see README)
+data/davis/
+data/kiba/
+
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

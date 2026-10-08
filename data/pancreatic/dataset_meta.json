@@ -1,0 +1,36 @@
+{
+  "targets": {
+    "ERBB2": "P04626",
+    "KRAS": "P01116",
+    "TP53": "P04637"
+  },
+  "n_pairs": 5383,
+  "n_drugs": 5383,
+  "per_target": {
+    "ERBB2": 2600,
+    "KRAS": 2738,
+    "TP53": 45
+  },
+  "split": {
+    "train": 4306,
+    "val": 538,
+    "test": 539
+  },
+  "label": "pChEMBL (higher = stronger binder)",
+  "keep_standard_types": [
+    "EC50",
+    "IC50",
+    "KD",
+    "KI"
+  ],
+  "davis_sequence_overlap": {
+    "davis_proteins_path": "davis/proteins.txt (DeepDTA / GraphDTA release)",
+    "exact_matches": {
+      "ERBB2": "ERBB2",
+      "KRAS": null,
+      "TP53": null
+    },
+    "n_exact_hits": 1
+  },
+  "note": "ChEMBL Ki/Kd/IC50/EC50 only (POTENCY excluded). Larger than DMFF ~2889 due to ChEMBL growth; TP53 remains sparse."
+}
