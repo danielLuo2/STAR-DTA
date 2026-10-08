@@ -20,6 +20,7 @@ STAR-DTA predicts drug–target binding affinity from a drug SMILES string and a
 ```text
 train.py                 Davis / KIBA training and evaluation (standard split)
 train_pancreatic.py      training on the pancreatic-cancer ChEMBL set
+evaluate.py              evaluate a released checkpoint on its test split
 src/model.py             the STAR-DTA model
 src/data.py              data loading and the PyG sample dataset
 src/features.py          molecular graph, SMILES, Morgan and protein featurization
@@ -104,6 +105,24 @@ python train_pancreatic.py --data-dir data/pancreatic --seed 42
 | Davis | 0.217 ± 0.006 | 0.896 ± 0.005 |
 | KIBA | 0.124 ± 0.002 | 0.904 ± 0.001 |
 | Pancreatic-cancer set | 0.415 ± 0.010 | 0.810 ± 0.002 |
+
+**Trained checkpoints.**
+- The nine checkpoints behind the paper's numbers are attached to the [v1.0.0 release](https://github.com/danielLuo2/STAR-DTA/releases/tag/v1.0.0):
+  - Davis, KIBA and the pancreatic-cancer set;
+  - seeds 42, 2026 and 3407 each;
+  - about 12 MB per file.
+- Each file holds:
+  - the evaluation (EMA) weights;
+  - the label standardization statistics;
+  - the output calibration.
+- Put them in `checkpoints/` and run:
+
+```bash
+python evaluate.py --checkpoint checkpoints/star-dta_davis_seed42.pt --data-root data
+python evaluate.py --checkpoint checkpoints/star-dta_pancreatic_seed42.pt --data-dir data/pancreatic
+```
+
+This prints the test metrics reported in the paper for that seed. `SHA256SUMS.txt` in the release lists the file checksums.
 
 **Reproducibility.** PyTorch Geometric's GIN aggregation uses non-deterministic GPU kernels, so two runs with the same seed can differ slightly. Per-seed numbers will therefore not match exactly; the means and standard deviations should agree within the reported spread.
 
